@@ -6,7 +6,7 @@ we write it into a .txt file."""
 import os
 import scipy
 from scipy.io import loadmat
-from picture_operation import open_picture, show_picture
+from picture_operation import open_picture
 from paths import *
 
 
@@ -78,8 +78,6 @@ if __name__ == "__main__":
 
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
-            #cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
-            #show_picture("detection", img, 0, "")
 
             #Conversion into YOLO and add it to a list.
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
