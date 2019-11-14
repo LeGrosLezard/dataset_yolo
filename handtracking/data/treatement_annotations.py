@@ -25,12 +25,13 @@ def recuperate_points(points):
     """From annotation recuperate points of hands.
     One list for one hand. Ignore Right and Left informations"""
 
-    coordinates = [[], []]
+    #Sometimes we have only one hand.
+    if len(points["boxes"][0]) == 2:
+        coordinates = [[j[0].tolist() for i in points["boxes"][0][0] for j in i[0] if j[0] not in ("R", "L")],
+                       [j[0].tolist() for i in points["boxes"][0][1] for j in i[0] if j[0] not in ("R", "L")]]
+    else:
+        coordinates = [[j[0].tolist() for i in points["boxes"][0][0] for j in i[0] if j[0] not in ("R", "L")]]
 
-    for nb, i in enumerate(points["boxes"][0]):
-        for j in i[0][0]:
-            if j[0] not in ("R", "L"):
-                coordinates[nb].append(j[0].tolist())
 
     return coordinates
 
@@ -63,14 +64,11 @@ if __name__ == "__main__":
 
         for coord in coordinates:
 
-            #Sometimes we have only one hand.
-            if coord != []:
+            #Recuperate detection.
+            (x, y, w, h) = recuperate_detection(coord)
 
-                #Recuperate detection.
-                (x, y, w, h) = recuperate_detection(coord)
-
-                #Make a detection on a rectangle.
-                make_rectangle(pictures.format(p_picture[nb]), x, y, w, h)
+            #Make a detection on a rectangle.
+            make_rectangle(pictures.format(p_picture[nb]), x, y, w, h)
 
 
 
