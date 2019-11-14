@@ -1,3 +1,5 @@
+import os
+
 import cv2
 
 import scipy
@@ -6,6 +8,18 @@ from scipy.io import loadmat
 from picture_operation import open_picture
 from picture_operation import show_picture
 from picture_operation import make_rectangle
+
+from paths import path_annotation
+from paths import annotations
+from paths import path_picture
+from paths import pictures
+
+
+def make_liste_os(path):
+    liste = os.listdir(path)
+
+    return liste
+
 
 def recuperate_points(points):
     """From annotation recuperate points of hands.
@@ -21,36 +35,42 @@ def recuperate_points(points):
     return coordinates
 
 
-
 def recuperate_detection(coordinates):
     """Recuperate rectangle of detections via min and max (x; y)"""
 
-    detection = [[i[1] for i in coordinates[nb]],
-                 [i[0] for i in coordinates[nb]]]
+    detection = [[i[1] for i in coordinates],
+                 [i[0] for i in coordinates]]
 
-    points = int(min(detection[0])), int(min(detection[1])),\
-             int(max(detection[0])), int(max(detection[1]))
-
-    return points
-
+    return int(min(detection[0])), int(min(detection[1])),\
+           int(max(detection[0])), int(max(detection[1]))
 
 
 
 
 if __name__ == "__main__":
 
-    path_anno = r"C:\Users\jeanbaptiste\Desktop\jgfdposgj\handtracking\data\annotation\{}"
-    picture = r"C:\Users\jeanbaptiste\Desktop\jgfdposgj\handtracking\data\Buffy_1.jpg"
+    #Make list of folder.
+    p_annotation = make_liste_os(path_annotation)
+    p_picture = make_liste_os(path_picture)
 
-    #ouverture fichier .mat
-    points = scipy.io.loadmat(path_anno.format("Buffy_1.mat"))
-    
-    coordinates = recuperate_points(points)
+    for nb in range(len(p_annotation)):
 
-    for nb in range(len(coordinates)):
-        (x, y, w, h) = recuperate_detection(coordinates)
+        #Load .mat file.
+        points = scipy.io.loadmat(annotations.format(p_annotation[nb]))
 
-        make_rectangle(picture, x, y, w, h)
+        #Recuperate annotations from .mat.
+        coordinates = recuperate_points(points)
+
+        for coord in coordinates:
+
+            #Sometimes we have only one hand.
+            if coord != []:
+
+                #Recuperate detection.
+                (x, y, w, h) = recuperate_detection(coord)
+
+                #Make a detection on a rectangle.
+                make_rectangle(pictures.format(p_picture[nb]), x, y, w, h)
 
 
 
