@@ -12,3 +12,5 @@ On les transformes en rectangle en ne prenant que 4 points ((x min, y min),(x ma
 On convertit via la norme de YOLO
 
 On l'écrit en fichier .txt
+
+au cas ou ca marche pas... https://github.com/SignusRobotics/oxford-hands-to-yolo/blob/master/converter.py
