@@ -66,7 +66,6 @@ if __name__ == "__main__":
     p_picture = os.listdir(path_picture)
 
     for nb in range(len(p_annotation)):
-
         #Recuperate annotations from .mat from a load .mat file.
         coordinates = recuperate_points(scipy.io.loadmat(annotations.format(p_annotation[nb])))
 
@@ -75,10 +74,8 @@ if __name__ == "__main__":
 
             #Recuperate detection.
             x, y, w, h = recuperate_detection(coord)
-
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
-
             #Conversion into YOLO and add it to a list.
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
 
