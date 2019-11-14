@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+import datetime
 
 def open_picture(image):
     """We open picture for read it."""
@@ -36,3 +37,16 @@ def blanck_picture(img):
     blank_image[0:, 0:] = 0, 0, 0
 
     return blank_image
+
+
+def start():
+    """Recuperate current time"""
+    start_time = datetime.datetime.now()
+    return start_time
+
+def end(start_time):
+    """Recuperate current time - starter"""
+
+    end_time = datetime.datetime.now()
+    seconds_elapsed = (end_time - start_time).total_seconds()
+    print("It took {} to execute this".format(hms_string(seconds_elapsed)))
