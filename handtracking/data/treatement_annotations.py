@@ -58,7 +58,8 @@ def write_into_txt_file(coordinate, picture, path_txt):
         for nb, coords in enumerate(coordinate):
             if nb >= 1:file.write("\n")
             for pos, coord in enumerate(coords):
-                if pos in (0, 1, 2):file.write(str(coord) + " ")
+                if pos == 0: file.write("0 " + str(coord) + " ")
+                elif pos in (1, 2):file.write(str(coord) + " ")
                 else:file.write(str(coord))
 
 
@@ -87,4 +88,4 @@ if __name__ == "__main__":
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
 
         #Write it in a .txt file.
-        #write_into_txt_file(coords, p_picture[nb], path_txt_annotation)
+        write_into_txt_file(coords, p_picture[nb], path_txt_annotation)
