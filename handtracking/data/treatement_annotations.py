@@ -27,10 +27,13 @@ def recuperate_points(points):
 
     #Sometimes we have only one hand.
     if len(points["boxes"][0]) == 2:
-        coordinates = [[j[0].tolist() for i in points["boxes"][0][0] for j in i[0] if j[0] not in ("R", "L")],
-                       [j[0].tolist() for i in points["boxes"][0][1] for j in i[0] if j[0] not in ("R", "L")]]
+        coordinates = [[j[0].tolist() for i in points["boxes"][0][0]\
+                        for j in i[0] if j[0] not in ("R", "L")],
+                       [j[0].tolist() for i in points["boxes"][0][1]\
+                        for j in i[0] if j[0] not in ("R", "L")]]
     else:
-        coordinates = [[j[0].tolist() for i in points["boxes"][0][0] for j in i[0] if j[0] not in ("R", "L")]]
+        coordinates = [[j[0].tolist() for i in points["boxes"][0][0]\
+                        for j in i[0] if j[0] not in ("R", "L")]]
 
 
     return coordinates
@@ -46,6 +49,21 @@ def recuperate_detection(coordinates):
            int(max(detection[0])), int(max(detection[1]))
 
 
+def convert_to_yolo_annotation(size, x, y, w, h):
+    """https://github.com/ManivannanMurugavel/Yolo-Annotation-Tool-New-/blob/master/main.py"""
+
+    dw = 1./size[0]
+    dh = 1./size[1]
+    x = (x + w)/2.0
+    y = (y + h)/2.0
+    w = w - x
+    h = h - y
+    x = x*dw
+    w = w*dw
+    y = y*dh
+    h = h*dh
+
+    return (x,y,w,h)
 
 
 if __name__ == "__main__":
@@ -67,11 +85,15 @@ if __name__ == "__main__":
             #Recuperate detection.
             (x, y, w, h) = recuperate_detection(coord)
 
-            #Make a detection on a rectangle.
-            make_rectangle(pictures.format(p_picture[nb]), x, y, w, h)
+            #Make a detection on a rectangle ANIMATION.
+            img = open_picture(pictures.format(p_picture[nb]))
+            cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
+            show_picture("rectangle detection", img, 0, "")
 
+            size = img.shape
+            (x, y, w, h) = convert_to_yolo_annotation(size, x, y, w, h)
 
-
+            print(x, y, w, h)
 
 
 
