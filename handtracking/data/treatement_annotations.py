@@ -51,12 +51,19 @@ def convert_to_yolo_annotation(size, x, y, w, h):
     x = x*1./size[0]; w = w*1./size[0]
     y = y*1./size[1]; h = h*1./size[1]
 
-    return (x, y, w, h)
+    return x, y, w, h
 
 
-def write_into_txt_file():
-    pass
+def write_into_txt_file(coordinate, picture, path_txt):
+    """Writte data into txt. if coordinate is the second add \n
+    if it's the last position don't add space"""
 
+    with open(path_txt.format(picture[:-4]), "a") as file:
+        for nb, coords in enumerate(coordinate):
+            if nb >= 1:file.write("\n")
+            for pos, coord in enumerate(coords):
+                if pos in (0, 1, 2):file.write(str(coord) + " ")
+                else:file.write(str(coord))
 
 
 if __name__ == "__main__":
@@ -73,22 +80,19 @@ if __name__ == "__main__":
         #Recuperate annotations from .mat.
         coordinates = recuperate_points(points)
 
+        coords = []
         for coord in coordinates:
 
             #Recuperate detection.
-            (x, y, w, h) = recuperate_detection(coord)
+            x, y, w, h = recuperate_detection(coord)
 
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
             cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
             show_picture("detection", img, 0, "")
 
-            #Recup sizes of the picture.
-            size = img.shape
+            #Conversion into YOLO and add it to a list.
+            coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
 
-            #Conversion into YOLO.
-            (x, y, w, h) = convert_to_yolo_annotation(size, x, y, w, h)
-
-            #Write it in a .txt file.
-            write_into_txt_file()
-
+        #Write it in a .txt file.
+        write_into_txt_file(coords, p_picture[nb], path_txt_annotation)
