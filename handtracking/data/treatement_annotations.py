@@ -31,7 +31,7 @@ def recuperate_points(points):
 def recuperate_detection(coordinates):
     """Recuperate rectangle of detections via min and max (x; y)"""
 
-    detection = [[i[1] for i in coordinates], [i[0] for i in coordinates]]
+    detection = [[i[1] for i in coordinates[:4]], [i[0] for i in coordinates[:4]]]
 
     return int(min(detection[0])), int(min(detection[1])),\
            int(max(detection[0])), int(max(detection[1]))
