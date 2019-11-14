@@ -1,6 +1,5 @@
-""" We load .mat file, we recuperate points into list from the .mat file, we recuperate min(x;y)
-max(x;y) for the detection,  we display it on picture ANIMATION, we convert it into YOLO annotations,
-we write it into a .txt file."""
+""" We load .mat and recuperate points from .mat file annotation. We recuperate min and max(x;y)
+who's represent a rectangle. Next we convert it into YOLO annotation and save it in .txt."""
 
 
 import os
@@ -8,6 +7,7 @@ import scipy
 from scipy.io import loadmat
 from picture_operation import open_picture
 from paths import *
+
 
 
 def recuperate_points(points):
@@ -27,6 +27,7 @@ def recuperate_points(points):
     return coordinates
 
 
+
 def recuperate_detection(coordinates):
     """Recuperate rectangle of detections via min and max (x; y)"""
 
@@ -34,6 +35,7 @@ def recuperate_detection(coordinates):
 
     return int(min(detection[0])), int(min(detection[1])),\
            int(max(detection[0])), int(max(detection[1]))
+
 
 
 def convert_to_yolo_annotation(size, x, y, w, h):
@@ -45,6 +47,7 @@ def convert_to_yolo_annotation(size, x, y, w, h):
     y = y*1./size[1]; h = h*1./size[1]
 
     return x, y, w, h
+
 
 
 def write_into_txt_file(coordinate, picture, path_txt):
@@ -59,6 +62,7 @@ def write_into_txt_file(coordinate, picture, path_txt):
                 else:file.write(str(coord))
 
 
+
 if __name__ == "__main__":
 
     #Make list of folder.
@@ -66,6 +70,7 @@ if __name__ == "__main__":
     p_picture = os.listdir(path_picture)
 
     for nb in range(len(p_annotation)):
+
         #Recuperate annotations from .mat from a load .mat file.
         coordinates = recuperate_points(scipy.io.loadmat(annotations.format(p_annotation[nb])))
 
@@ -74,8 +79,10 @@ if __name__ == "__main__":
 
             #Recuperate detection.
             x, y, w, h = recuperate_detection(coord)
+
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
+
             #Conversion into YOLO and add it to a list.
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
 
