@@ -4,16 +4,13 @@ we convert it into YOLO annotations, we write it into a .txt file."""
 
 #For run folder
 import os
-#For have a visual
-import cv2
 #For load .mat file
 import scipy
 from scipy.io import loadmat
 #For have a visual
 from picture_operation import open_picture, show_picture
 #Paths for folder.
-from paths import path_annotation, annotations, path_picture,\
-                  pictures, path_txt_annotation
+from paths import *
 
 
 def recuperate_points(points):
@@ -36,8 +33,7 @@ def recuperate_points(points):
 def recuperate_detection(coordinates):
     """Recuperate rectangle of detections via min and max (x; y)"""
 
-    detection = [[i[1] for i in coordinates],
-                 [i[0] for i in coordinates]]
+    detection = [[i[1] for i in coordinates], [i[0] for i in coordinates]]
 
     return int(min(detection[0])), int(min(detection[1])),\
            int(max(detection[0])), int(max(detection[1]))
@@ -74,11 +70,8 @@ if __name__ == "__main__":
 
     for nb in range(len(p_annotation)):
 
-        #Load .mat file.
-        points = scipy.io.loadmat(annotations.format(p_annotation[nb]))
-
-        #Recuperate annotations from .mat.
-        coordinates = recuperate_points(points)
+        #Recuperate annotations from .mat from a load .mat file.
+        coordinates = recuperate_points(scipy.io.loadmat(annotations.format(p_annotation[nb])))
 
         coords = []
         for coord in coordinates:
@@ -88,8 +81,8 @@ if __name__ == "__main__":
 
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
-            cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
-            show_picture("detection", img, 0, "")
+            #cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
+            #show_picture("detection", img, 0, "")
 
             #Conversion into YOLO and add it to a list.
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
