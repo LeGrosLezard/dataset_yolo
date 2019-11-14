@@ -5,7 +5,7 @@ who's represent a rectangle. Next we convert it into YOLO annotation and save it
 import os
 import scipy
 from scipy.io import loadmat
-from picture_operation import open_picture
+import cv2
 from paths import *
 
 
@@ -81,10 +81,10 @@ if __name__ == "__main__":
             x, y, w, h = recuperate_detection(coord)
 
             #Make a detection on a rectangle ANIMATION.
-            img = open_picture(pictures.format(p_picture[nb]))
+            img = cv2.imread(pictures.format(p_picture[nb]))
 
             #Conversion into YOLO and add it to a list.
             coords.append([convert_to_yolo_annotation(img.shape, x, y, w, h)][0])
 
         #Write it in a .txt file.
-        write_into_txt_file(coords, p_picture[nb], path_txt_annotation)
+        #write_into_txt_file(coords, p_picture[nb], path_txt_annotation)
