@@ -13,4 +13,8 @@ On convertit via la norme de YOLO
 
 On l'écrit en fichier .txt
 
-au cas ou ca marche pas... https://github.com/SignusRobotics/oxford-hands-to-yolo/blob/master/converter.py
+bon jvai laisser tourner toute la nuit mtn faire un tuto comment utiliser ce machin
+
+Loaded: 1.605292 seconds
+Region Avg IOU: 0.217507, Class: 1.000000, Obj: 0.499834, No Obj: 0.499268, Avg Recall: 0.000000,  count: 1
+Region Avg IOU: 0.217507, Class: 1.000000, Obj: 0.499834, No Obj: 0.499268, Avg Recall: 0.000000,  count: 1
