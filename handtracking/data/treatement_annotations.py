@@ -1,15 +1,12 @@
-""" We load .mat file, we recuperate points into list from the .mat file,
-we recuperate min(x;y) max(x;y) for the detection,  we display it on picture ANIMATION,
-we convert it into YOLO annotations, we write it into a .txt file."""
+""" We load .mat file, we recuperate points into list from the .mat file, we recuperate min(x;y)
+max(x;y) for the detection,  we display it on picture ANIMATION, we convert it into YOLO annotations,
+we write it into a .txt file."""
 
-#For run folder
+
 import os
-#For load .mat file
 import scipy
 from scipy.io import loadmat
-#For have a visual
 from picture_operation import open_picture, show_picture
-#Paths for folder.
 from paths import *
 
 
