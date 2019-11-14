@@ -21,14 +21,14 @@ def recuperate_points(points):
     One list for one hand. Ignore Right and Left informations"""
 
     #Sometimes we have only one hand.
-    if len(points["boxes"][0]) == 2:
+    if len(points["boxes"][0]) >= 2:
         coordinates = [[j[0].tolist() for i in points["boxes"][0][0]\
-                        for j in i[0] if j[0] not in ("R", "L")],
+                        for j in i[0] if j.tolist() not in (["R"], ["L"], [])],
                        [j[0].tolist() for i in points["boxes"][0][1]\
-                        for j in i[0] if j[0] not in ("R", "L")]]
+                        for j in i[0] if j.tolist() not in (["R"], ["L"], [])]]
     else:
         coordinates = [[j[0].tolist() for i in points["boxes"][0][0]\
-                        for j in i[0] if j[0] not in ("R", "L")]]
+                        for j in i[0] if j.tolist() not in (["R"], ["L"], [])]]
 
     return coordinates
 
