@@ -1,23 +1,20 @@
-""" - We load .mat file, We recuperate points into list from the .mat file,
-We recuperate min(x;y) max(x;y) for the detection,  We display it on picture ANIMATION,
-We convert it into YOLO annotations, We write it into a .txt file.
-"""
+""" We load .mat file, we recuperate points into list from the .mat file,
+we recuperate min(x;y) max(x;y) for the detection,  we display it on picture ANIMATION,
+we convert it into YOLO annotations, we write it into a .txt file."""
 
 #For run folder
 import os
-
 #For have a visual
 import cv2
-
 #For load .mat file
 import scipy
 from scipy.io import loadmat
-
 #For have a visual
 from picture_operation import open_picture, show_picture
-
 #Paths for folder.
-from paths import path_annotation, annotations, path_picture, pictures, path_txt_annotation
+from paths import path_annotation, annotations, path_picture,\
+                  pictures, path_txt_annotation
+
 
 def recuperate_points(points):
     """From annotation recuperate points of hands.
@@ -49,14 +46,10 @@ def recuperate_detection(coordinates):
 def convert_to_yolo_annotation(size, x, y, w, h):
     """https://github.com/ManivannanMurugavel/Yolo-Annotation-Tool-New-/blob/master/main.py"""
 
-    x = (x + w)/2.0
-    y = (y + h)/2.0
-    w = w - x
-    h = h - y
-    x = x*1./size[0]
-    w = w*1./size[0]
-    y = y*1./size[1]
-    h = h*1./size[1]
+    x = (x + w)/2.0; y = (y + h)/2.0
+    w = w - x; h = h - y
+    x = x*1./size[0]; w = w*1./size[0]
+    y = y*1./size[1]; h = h*1./size[1]
 
     return (x, y, w, h)
 
@@ -88,7 +81,7 @@ if __name__ == "__main__":
             #Make a detection on a rectangle ANIMATION.
             img = open_picture(pictures.format(p_picture[nb]))
             cv2.rectangle(img, (x, y), (w, h), (0, 0, 255), 3)
-            show_picture("rectangle detection", img, 0, "")
+            show_picture("detection", img, 0, "")
 
             #Recup sizes of the picture.
             size = img.shape
