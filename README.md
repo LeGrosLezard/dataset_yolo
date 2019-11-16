@@ -1,8 +1,7 @@
 # foehnzofije
 
-jte jure jles ai toute les erreurs toutes celle possibles serieux jresous un truk y'en 5 autres a la suite qui pop c trop chiant putin
+bah chai pas mais ca marche, mtn demandé si on peut passer du xml au txt jvai pas tout refaire c chiant
 
-essayer avec les annotations xml = faire les 4000 a la mains...
 
 bon réésayer yolo avec tf -> main
 
