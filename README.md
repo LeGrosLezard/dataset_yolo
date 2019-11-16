@@ -13,10 +13,4 @@ On convertit via la norme de YOLO
 
 On l'écrit en fichier .txt
 
-bon jvai laisser tourner toute la nuit mtn faire un tuto comment utiliser ce machin
-
-Loaded: 1.605292 seconds
-Region Avg IOU: 0.217507, Class: 1.000000, Obj: 0.499834, No Obj: 0.499268, Avg Recall: 0.000000,  count: 1
-Region Avg IOU: 0.217507, Class: 1.000000, Obj: 0.499834, No Obj: 0.499268, Avg Recall: 0.000000,  count: 1
-
-pcque on pourrait faire un yolo visage yeux main ect... mais ca prendrai plein de temps contre le poids et data et j'en ai pas jvai juste les piquer
+récupérer des models c trop chiant d'attendre en plus mon pc  tient 10 sec sans batterie, chui un pro du solitaire par contre !
