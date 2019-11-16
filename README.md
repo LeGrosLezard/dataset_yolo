@@ -2,10 +2,12 @@
 
 
 
-- re télécharger tout yolo
+bon réésayer yolo avec tf -> main
 
-- reesayer
+bon réésayer yolo avec tf -> visage (sinon haarcascade)
 
-(en gros faut faire son programme sous IDLE puis le lancé avec l'invit de commande sous l'environement !!!! et pas faire f5)
+puis faire un classificateur avec tf et sklearn pour emotion détection (pour voir les 2)
 
-- essayer dlib
+oh jpe meme avoir speech recognition !!!!!!!!!!!!! avec sklearn (mot positif + mot signification)
+
+par contre faut que ca se charge c long c chiant ca dure des heures pfffffff
