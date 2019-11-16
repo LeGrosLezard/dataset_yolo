@@ -1,6 +1,6 @@
 # foehnzofije
 
-- télécharger anaconda
+
 
 - re télécharger tout yolo
 
