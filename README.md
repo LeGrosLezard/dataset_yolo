@@ -1,8 +1,9 @@
 # foehnzofije
 
-essayer de comprendre comment charger un model mtn pcque y'a plusieurs techniques (250 pour 200 images en 2heures sur gpu 1.0 laisse tomber)
 
-main -> model de victordibia
+
+
+main -> trouver un model pour les mouvement vers la tete  
 
 bon réésayer yolo avec tf -> visage (sinon haarcascade)
 
