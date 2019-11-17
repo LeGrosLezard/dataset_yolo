@@ -3,7 +3,7 @@
 
 
 
-main -> trouver un model pour les mouvement vers la tete stp faites que le model de peter marche ^^
+main -> trouver un model ou le faire grooos jvai devoir le faire moi meme ptin
 
 dans ces mouvements faire classificateur de geste... 
 
