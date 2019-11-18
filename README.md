@@ -1,10 +1,6 @@
 # foehnzofije
 
-souviens toi lors de la capture des images:
-
-<strong>repete les gestes, il faut 300 images pour chaque geste vers la tete</strong>
-
-pcque moi oxford et ego c'est pas mes gestes a moi ='(
+pk avoir mis la touch suppr si pres d'entree....
 
 main -> yolo
 
