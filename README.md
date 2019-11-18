@@ -1,8 +1,10 @@
 # foehnzofije
 
-faire un detecteur de stylo avec yolo avant
+souviens toi lors de la capture des images:
 
-ok faire un truk qui detecte les mains a 100% soit faire tout un yolo avec les mains ou trouver un model
+<strong>repete les gestes, il faut 300 images pour chaque geste vers la tete</strong>
+
+pcque moi oxford et ego c'est pas mes gestes a moi ='(
 
 main -> yolo
 
