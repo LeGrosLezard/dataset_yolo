@@ -1,5 +1,7 @@
 # foehnzofije
 
+ne garder que les main de profil ou semi profil, les flou + les transitions et les demi main
+
 épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
 
 est ce que jdois mettre des filtres sur les images ?
