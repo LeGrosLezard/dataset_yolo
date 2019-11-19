@@ -1,6 +1,6 @@
 # foehnzofije
 
-ne garder que les main de profil ou semi profil, les flou + les transitions et les demi main
+ne garder que les main + un peu du bras de profil ou semi profil, les flou + les transitions et les demi main
 
 épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
 
