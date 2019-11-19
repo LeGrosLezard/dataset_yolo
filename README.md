@@ -10,6 +10,7 @@ la perspective change un truk ? (main pres, main loin)
 
 jdois mettre toutes les images en meme dimension ?
 
+j'ai du effacer tous mes dossiers + la poubelle
 
 main -> yolo
 
