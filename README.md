@@ -1,8 +1,13 @@
 # foehnzofije
 
-pk avoir mis la touch suppr si pres d'entree....
+épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
 
-faut les annoter apres ptin bon faut que ca marchee
+est ce que jdois mettre des filtres sur les images ?
+
+la perspective change un truk ? (main pres, main loin)
+
+jdois mettre toutes les images en meme dimension ?
+
 
 main -> yolo
 
