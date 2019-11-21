@@ -1,20 +1,18 @@
 # foehnzofije
 
-faire que les mec en gros
 
-v2 = second plan
 
-trouver un mec qui répondent et qui réponde a ca ^^
+bon j'ai a peu pré 7000 image, finir les vidéo la, tout re télécharger depuis le cloud, comparer (j'en ai 30000 par vidéo de 5 min)
+
 
 épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
 
-est ce que jdois mettre des filtres sur les images ?
+
 
 la perspective change un truk ? (main pres, main loin)
 
-jdois mettre toutes les images en meme dimension ?
 
-j'ai du effacer tous mes dossiers + la poubelle
+
 
 main -> yolo
 
