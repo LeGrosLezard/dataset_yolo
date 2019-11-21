@@ -2,9 +2,9 @@
 
 
 
-bon j'ai a peu pré 7000 image, finir les vidéo la, tout re télécharger depuis le cloud, comparer (j'en ai 30000 par vidéo de 5 min)
+si ca marche pas pas grave, faire émotions et réesayer mais c chiant, finir video
 
-puréé jviens de le faire ce script... avant jy allé a l'oeil nu sur les doss
+mais ca devrait le faire faut juste + de main 2nd plan
 
 épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
 
