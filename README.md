@@ -1,16 +1,18 @@
 # foehnzofije
 
+stop finir les dernieres vidéo normalement c bon pour les gros plans et des fois second plan
 
+faire le model surement 2 jours et si ca marche pas jte jure que.... mais la dataset de geste sté buffy la qualité etait mouais et les mains hyper loin et j'avais une detection avec les main hyper pres chpas
 
-si ca marche pas pas grave, faire émotions et réesayer mais c chiant, finir video
+- finir les derniere vidéo
 
-mais ca devrait le faire faut juste + de main 2nd plan
+- tout retélécharger
 
-épuré jusqu'a voir les 100 000 images mais est-ce que les models ralentissent ?
+- derniere selection
 
+- comprendre quand est-ce qu'il faut l'arreter 
 
-
-la perspective change un truk ? (main pres, main loin)
+- faire un entrainement gpu 1.0
 
 
 
@@ -22,3 +24,5 @@ dans ces mouvements faire classificateur de geste...
 faire un contour exact des doigt et non pas un rectangle
 
 récupérer (animation matplolib) les pts des doigts et leur placement....
+
+pour émotion -> truk pour émotion mais faire un truk dlib pour voir
