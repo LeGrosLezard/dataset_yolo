@@ -1,14 +1,5 @@
 # foehnzofije
 
-stop finir les dernieres vidéo normalement c bon pour les gros plans et des fois second plan
-
-faire le model surement 2 jours et si ca marche pas jte jure que.... mais la dataset de geste sté buffy la qualité etait mouais et les mains hyper loin et j'avais une detection avec les main hyper pres chpas
-
-stp marche... non sérieux j'en peux plus j'ai une courbature entre le doigt du mariage et le doigt d'honneur, si ca marche pas jle referai a la fin
-
-- finir les derniere vidéo
-
-- tout retélécharger
 
 - derniere selection
 
