@@ -1,6 +1,6 @@
 # foehnzofije
 
-merde est-ce que les annotations se redimensionnent comme les images pendant l'entrainement ?
+
 
 - faire les ~ 20 000 annotations
 
