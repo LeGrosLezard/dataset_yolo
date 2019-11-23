@@ -1,10 +1,10 @@
 # foehnzofije
 
-si fatigue rien marqué
+
 
 - faire les ~ 20 000 annotations
 
-- completer la dataset au cas ou avec des photo de la main + 1/4 avant bras
+- télécharger des films et
 
 - comprendre quand est-ce qu'il faut l'arreter 
 
