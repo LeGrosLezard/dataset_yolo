@@ -1,7 +1,9 @@
 # foehnzofije
 
 
-- derniere selection
+- faire les ~ 20 000 annotations
+
+- completer la dataset au cas ou avec des photo de la main + 1/4 avant bras
 
 - comprendre quand est-ce qu'il faut l'arreter 
 
