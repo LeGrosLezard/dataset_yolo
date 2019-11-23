@@ -6,7 +6,7 @@
 
 - télécharger des films et
 
-- comprendre quand est-ce qu'il faut l'arreter 
+- trouver quand l'erreur stagne
 
 - faire un entrainement gpu 1.0
 
