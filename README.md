@@ -1,6 +1,6 @@
 # foehnzofije
 
-bon apres jtrouve un taff mais la, jamais je refais ca
+bon apres jtrouve un taff mais la, jamais je refais ca (a par si ca marche un peu )
 
 - plus que 31 dossiers (c vraiment trop long a faire 1semaine....)
 
