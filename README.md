@@ -8,6 +8,8 @@ et faire hsv automatique
 
 genre carré peau et ensute ca va cherché autour la couleur de la main
 
+essayer une autre video
+
 pendant, le chargement dlib (fermeture des yeux ? complement émotion) + chercher un modele d'émotion, si ca marche pas, ah oui si possible faire un truk qui dit ce que le mec regarde et qu'est-ce qui regarde, 
 
 - soit les annotations
