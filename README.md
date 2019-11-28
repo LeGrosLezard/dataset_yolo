@@ -1,5 +1,7 @@
 # foehnzofije
 
+pcque forcement faut plus le faire sur la cam, pcque sur la cam y'a pas la meme quali enfete ! e tdc les modeles marchent pas jcrois
+
 finir annotation mais la
 
 faut que ca le fasse pour toutes les vidéo
