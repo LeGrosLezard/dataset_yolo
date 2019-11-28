@@ -4,10 +4,9 @@ finir annotation mais la
 
 faut que ca le fasse pour toutes les vidéo
 
-faut pas que ca lag
+faut pas que ca lag / récupérer la couleur dedans
 
-ouais c'est nul mais c'est un bon début
-
+c'est parce que sur la vidéo sur laquelle j'essayé ce bordel ca marchait une fois sur 5 images de la vidéo enfete c'est ok ! plus que 10 dossiers !
 
 pendant, le chargement dlib (fermeture des yeux ? complement émotion) + chercher un modele d'émotion, si ca marche pas, ah oui si possible faire un truk qui dit ce que le mec regarde et qu'est-ce qui regarde, 
 
