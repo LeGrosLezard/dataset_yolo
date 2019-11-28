@@ -13,3 +13,5 @@ pendant, le chargement dlib (fermeture des yeux ? complement émotion) + cherche
 - au mieux il manque des positions des mains
 
 - tester un truk hsv automatique
+
+- tester hand dlib
