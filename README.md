@@ -2,7 +2,7 @@
 
 plus que 2
 
-- verifier annotations et mettre tous les trucks vide dans un nouveau dossier
+- verifier annotations et mettre tous les trucks vide dans un nouveau dossier et les faire
 
 - lancer l'entrainement
 
