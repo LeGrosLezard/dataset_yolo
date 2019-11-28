@@ -2,7 +2,12 @@
 
 finir annotation mais la
 
-faut récupérer que la main et un truk a faire avec hsv peut etre
+faut que ca le fasse pour toutes les vidéo
+
+faut pas que ca lag
+
+ouais c'est nul mais c'est un bon début
+
 
 pendant, le chargement dlib (fermeture des yeux ? complement émotion) + chercher un modele d'émotion, si ca marche pas, ah oui si possible faire un truk qui dit ce que le mec regarde et qu'est-ce qui regarde, 
 
