@@ -21,4 +21,6 @@
 
 
 
-<strong>video :</strong> annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml, récupération par screenshot de frame/frame video
+<strong>video :</strong> annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml, récupération par screenshot de frame/frame video 
+
+(41 195 annotations la prochaine fois éviter ne pas oublié de mettre le show de la vidéo...)
