@@ -8,11 +8,11 @@
 
 - partie visage dlib // modele emotion (ca y'en a plein plein)
 
-- voir si on peut faire un truk avec hsv (faire un truk avec de la proba si la main n'est plus detecter cherché comment on fait)
-
-  en gros on a la main via la couleur
+  en gros on a la main via la couleur -> ok
   
-  on trnasofrme ca en carré
+  on trnasofrme ca en carré -> ok
+  
+  mtn faut dire la couleur dans chaque carré
   
   proba en haut proba en bas
   
