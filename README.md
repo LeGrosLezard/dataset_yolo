@@ -1,5 +1,7 @@
 # foehnzofije
 
+- chercher/réparer les annotations cassées...
+
 - attendre 2 jours mtn et faire hsv
 
 - tester hand dlib
