@@ -17,3 +17,8 @@
   si last mouvement = bas bas donc bas mais pas au dela d'une certaine distance et pour haut
   
   et selon couleur si dans distance (rectangke) + couleur 100 % (mais le background et couleur peau) 
+
+
+
+
+video : annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml
