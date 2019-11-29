@@ -14,7 +14,7 @@
   
   mtn faut dire la couleur dans chaque carré
   
-  proba en haut proba en bas
+  proba en haut proba en bas pcque sur un pannel petit 10 y'avais 80% du coup ben y'avais 80% mais c bon fallait juste parler j'ai eu peur tsé
   
   si last mouvement = bas bas donc bas mais pas au dela d'une certaine distance et pour haut
   
