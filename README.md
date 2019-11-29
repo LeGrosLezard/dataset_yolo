@@ -1,6 +1,6 @@
 # foehnzofije
 
-pause mais y'a un dossier image en trop....
+
 
 - tester hand dlib
 
