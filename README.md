@@ -1,6 +1,6 @@
 # foehnzofije
 
-
+- attendre 2 jours mtn et faire hsv
 
 - tester hand dlib
 
