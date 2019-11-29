@@ -21,4 +21,4 @@
 
 
 
-video : annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml
+<strong>video :</strong> annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml, récupération par screenshot de frame/frame video
