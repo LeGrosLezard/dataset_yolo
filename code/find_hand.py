@@ -65,7 +65,6 @@ def extraction_hands(hands, copy):
         """Recuperate extremum points of detections"""
 
         rectangle = [min([i[0][0] for i in liste]), min([i[0][1] for i in liste]),
-                     max([i[0][0] for i in liste]), max([i[0][1] for i in liste]),
                      max([i[0][2] for i in liste]), max([i[0][3] for i in liste])]
 
         return rectangle
@@ -73,31 +72,119 @@ def extraction_hands(hands, copy):
     #Draw the global includes detections.
     for hand, pt in enumerate([including_detection(hands[0]), including_detection(hands[1])]):
 
-        #cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
-        print(pt)
-        crop_detection = copy[pt[1]-20: pt[3] + pt[5]+20, pt[0]-20: pt[2] + pt[4]+20]
+        crop_detection = copy[pt[1] - 5: pt[1] + pt[3]  + 5, pt[0] - 5: pt[0] + pt[2] + 5]
+
 
         skin_crop = skin_detection(crop_detection)
-        cv2.imshow("dzadzadza", skin_crop)
-        cv2.waitKey(0)
 
         gaussian_thresh = cv2.adaptiveThreshold(cv2.cvtColor(skin_crop, cv2.COLOR_BGR2GRAY), 255,
-                                                 cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
+                                                 cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,10)
 
 
+
+        cv2.imshow('gaussian_thresh', gaussian_thresh)
+        cv2.waitKey(0)
         #Search contours
         contours, _ = cv2.findContours(gaussian_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-        maxi = 0
-        for cnts in contours:
-            if 4000 > cv2.contourArea(cnts) > 10 and cv2.contourArea(cnts) > maxi:
-                maxi = cv2.contourArea(cnts)
-        for cnts in contours:
-            if cv2.contourArea(cnts) == maxi:
-                cv2.drawContours(crop_detection, [cnts], -1, (0,255,0), 2)
 
-        cv2.imshow('Hand {}'.format(hand), crop_detection)
-        cv2.waitKey(0)
+        maxi = 0
+        maxi1 = 0
+        for cnts in contours:
+            if cv2.contourArea(cnts) > maxi:
+                maxi = cv2.contourArea(cnts)
+
+            if cv2.contourArea(cnts) < maxi and\
+                 cv2.contourArea(cnts) > maxi1:
+                maxi1 = cv2.contourArea(cnts)
+
+
+        for cnts in contours:
+            if cv2.contourArea(cnts) == maxi1:
+
+                x, y, w, h = cv2.boundingRect(cnts)
+                print(x, y, w, h)
+                if x + w < 10:pass
+                if y + h < 10:pass
+                if x+w >10:pass
+                if y+h>10:pass
+
+
+
+                mask = np.zeros(crop_detection.shape[:2],np.uint8)
+                bgdModel = np.zeros((1,65),np.float64)
+                fgdModel = np.zeros((1,65),np.float64)
+                rect = (x, y, x + w, y + h)
+                cv2.grabCut(crop_detection,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
+                mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
+                crop_mask = crop_detection*mask2[:,:,np.newaxis]
+
+                ok = skin_detection(crop_mask)
+
+                gaussian_thresh = cv2.adaptiveThreshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 255,
+                                                         cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
+
+                ok = skin_detection(crop_detection)
+                thresh = cv2.threshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 5, 255, 1)[1]
+
+                cv2.imshow('ok', ok)
+                cv2.imshow('thresh', thresh)
+                cv2.waitKey(0)
+
+
+
+
+
+
+
+##
+##
+##
+##
+##                gaussian_thresh = cv2.adaptiveThreshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 255,
+##                                                         cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,5,2)
+##
+##
+##
+##                def make_line(thresh):
+##                    """We make line for detect more than one area
+##                    with border, on eyelashes is paste to the border"""
+##
+##                    cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (255, 255, 255), 5)
+##                    cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (255, 255, 255), 5)
+##                    cv2.line(thresh, (thresh.shape[1], 0), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), 5)
+##                    cv2.line(thresh, (0,  thresh.shape[0]), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), 5)
+##
+##                    return thresh
+##
+##                gaussian_thresh = make_line(gaussian_thresh)
+##
+##
+##
+##
+##                contours, _ = cv2.findContours(gaussian_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+##
+##                maxi = 0
+##                maxi1 = 0
+##                for cnts in contours:
+##                    if cv2.contourArea(cnts) > maxi:
+##                        maxi = cv2.contourArea(cnts)
+##                    if cv2.contourArea(cnts) < maxi and\
+##                         cv2.contourArea(cnts) > maxi1:
+##                        maxi1 = cv2.contourArea(cnts)
+##
+##
+##                for cnts in contours:
+##                    if cv2.contourArea(cnts) == maxi1:
+##                        print(cv2.contourArea(cnts))
+##                        cv2.drawContours(crop_detection, [cnts], -1, (0,255,0), 1)
+##                        cv2.imshow('crop_detection', crop_detection)
+##                        cv2.waitKey(0)
+
+
+
+
+
 
 
 
