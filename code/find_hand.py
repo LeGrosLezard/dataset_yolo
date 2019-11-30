@@ -38,13 +38,30 @@ def find_hand(copy, diff):
     contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
                                    cv2.CHAIN_APPROX_NONE)
 
-    for contour in contours:
-        if 5000 > cv2.contourArea(contour) > 100:
-            (x, y, w, h) = cv2.boundingRect(contour)
-            cv2.rectangle(copy, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            print(x, y, w, h)
-            cv2.imshow('Automatic HSV', copy)
-            cv2.waitKey(0)
+    #cv2.rectangle(copy, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+
+    liste = [[cv2.boundingRect(contour)] for contour in contours if 5000 > cv2.contourArea(contour) > 100]
+
+    liste1 = [i for i in liste if i[0][0] < 200]
+    liste2 = [i for i in liste if i[0][0] > 200]
+
+
+    def maxi(liste):
+        rectangle = [min([i[0][0] for i in liste]),
+                     min([i[0][1] for i in liste]),
+                     max([i[0][0] for i in liste]),
+                     max([i[0][1] for i in liste]),
+                     max([i[0][2] for i in liste]),
+                     max([i[0][3] for i in liste])]
+        return rectangle
+
+    pts = [maxi(liste1), maxi(liste2)]
+
+    for pt in pts:
+        print(pt)
+        cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
+
 
 def video_lecture(video_name):
 
