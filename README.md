@@ -14,7 +14,7 @@
 
 - si main trouvé chercher dans l'endroit précédent
 
-- pour la vitesse faire le trucks de probabilité en définissant des zones + la frame + mouvement en cm (mouvement rapide/lent -> distance)
+- et on sauvegarde l'endroit et on va chercher a l'endroit
 
 
 
