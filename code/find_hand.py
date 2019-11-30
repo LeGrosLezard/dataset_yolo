@@ -25,7 +25,7 @@ def find_head(face_cap, out, detector, frame1, frame2):
     return diff
 
 
-def find_hand(copy, diff):
+def find_hand(diff):
     """We recuperate global detection of hands by:
     filter of colors. And analysis of contours."""
 
@@ -45,8 +45,13 @@ def find_hand(copy, diff):
     detection = [[cv2.boundingRect(contour)] for contour in contours if
                  5000 > cv2.contourArea(contour) > 100]
 
-    #Recuperate right and left hands detections. mid width frame is 200.
+    #Recuperate all right and left hands detections. mid width frame is 200.
     hands = [[i for i in detection if i[0][0] < 200], [i for i in detection if i[0][0] > 200]]
+
+    return hands
+
+
+def extraction_hands(hands, copy):
 
     def including_detection(liste):
         """Recuperate extremum points of detections"""
@@ -58,8 +63,24 @@ def find_hand(copy, diff):
         return rectangle
 
     #Draw the global includes detections.
-    for pt in [including_detection(hands[0]), including_detection(hands[1])]:
-        cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
+    for hand, pt in enumerate([including_detection(hands[0]), including_detection(hands[1])]):
+        #cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
+
+        crop = copy[pt[1] : pt[3] + pt[5], pt[0]-10 : pt[2] + pt[4]]
+
+        th2 = cv2.adaptiveThreshold(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY),255,cv2.ADAPTIVE_THRESH_MEAN_C,\
+                    cv2.THRESH_BINARY,11,2)
+
+        th3 = cv2.adaptiveThreshold(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY),255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+                    cv2.THRESH_BINARY,11,2)
+
+        cv2.imshow('dzadaz', th2)
+        cv2.waitKey(0)
+        cv2.imshow('gdsgdsgd', th3)
+        cv2.waitKey(0)
+
+        cv2.imshow('Hand {}'.format(hand), crop)
+        cv2.waitKey(0)
 
 
 
@@ -81,8 +102,9 @@ def video_lecture(video_name):
 
         try:
             diff = find_head(face_cap, copy, detector, frame1, frame2)
-            find_hand(copy, diff)
-        except: pass
+            hands = find_hand(diff)
+            extraction_hands(hands, copy)
+        except: pass #no hands or no head
 
         cv2.imshow('Automatic HSV', copy)
 
@@ -105,3 +127,11 @@ if __name__ == "__main__":
     video_name = "video/a.mp4"
 
     video_lecture(video_name)
+
+
+
+
+
+
+
+
