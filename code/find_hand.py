@@ -11,19 +11,17 @@ def find_head(face_cap, out, detector, frame1, frame2):
 
     #Collect points of face
 
+    points = [[face.left(), face.top(), face.right(), face.bottom()] for
+              face in detector(cv2.cvtColor(face_cap, cv2.COLOR_BGR2GRAY))]
 
-
-    contours = [np.array([ [face.left() - 10, face.top() - 50],
-                [face.right() + 10, face.top() - 50],
-                [face.right() + 10, face.bottom() + 10],
-                [face.left() - 10, face.bottom() + 10] ])
-                for face in
-                detector(cv2.cvtColor(face_cap, cv2.COLOR_BGR2GRAY))]
-
-    cv2.fillPoly(diff, pts=[contours][0], color=(255,255,255))
+    contours = np.array([ [points[0][0] - 10, points[0][1] - 50],
+                          [points[0][2] + 10, points[0][1] - 50],
+                          [points[0][2] + 10, points[0][3] + 10],
+                          [points[0][0] - 10, points[0][3] + 10] ])
+                          
+    cv2.fillPoly(diff, pts=[contours], color=(255, 255, 255))
 
     return diff
-
 
 
 def find_hand(copy, diff):
@@ -47,33 +45,33 @@ def video_lecture(video_name):
 
     video = cv2.VideoCapture(video_name)
 
-    frame1 = cv2.resize(video.read()[1], (800, 500))
-    frame2 = cv2.resize(video.read()[1], (800, 500))
+    frame1 = cv2.resize(video.read()[1], (400, 300))
+    frame2 = cv2.resize(video.read()[1], (400, 300))
     detector = dlib.get_frontal_face_detector()
 
     while True:
 
         start_time = time.time()
 
-        face_cap = cv2.resize(video.read()[1], (800, 500))
+        face_cap = cv2.resize(video.read()[1], (400, 300))
         copy = frame1.copy()
 
- 
-        diff = find_head(face_cap, copy, detector, frame1, frame2)
-
-        find_hand(copy, diff)
+        try:
+            diff = find_head(face_cap, copy, detector, frame1, frame2)
+            find_hand(copy, diff)
+        except: pass
 
         cv2.imshow('Automatic HSV', copy)
 
-
-
         frame1 = frame2
-        frame2 = cv2.resize(video.read()[1], (800, 500))
+        frame2 = cv2.resize(video.read()[1], (400, 300))
 
         elapsed_time = time.time() - start_time
         print(elapsed_time)
 
-        if cv2.waitKey(2) & 0xFF == ord('q'): break
+        if cv2.waitKey(400) & 0xFF == ord('q'):
+            cv2.imwrite('ici.jpg', face_cap)
+            break
 
     video.release()
     cv2.destroyAllWindows()
