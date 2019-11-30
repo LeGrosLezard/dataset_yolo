@@ -6,6 +6,8 @@
 
 - tester hand dlib
 
+#----------------------------------------
+
 - trouvé les main via la couleur peau 
 
 - si grand rectangle faire le contour
@@ -16,8 +18,9 @@
 
 - et on sauvegarde l'endroit et on va chercher a l'endroit en faisant le trucks des voisins
 
+- si main vers tete enlever le filled
 
-
+#----------------------------------------
 
 <strong>video :</strong> annotation, changement de dossier, changement de nom, verification annotations vides, make annotation et génération d'xml, récupération par screenshot de frame/frame video 
 
