@@ -6,7 +6,11 @@
 
 - tester hand dlib
 
-- trouvé les main via la couleur peau via un slider
+- trouvé les main via la couleur peau 
+
+- si grand rectangle faire le contour
+
+- si plein de rectangle dans une zone distinct en faire la moyenne
 
 - si main trouvé chercher dans l'endroit précédent
 
