@@ -5,62 +5,63 @@ import dlib
 
 
 def find_head(face_cap, out, detector, frame1, frame2):
+    """We find the head and draw a white mask on it. We
+    can recuperate only the hands"""
 
-    #Make difference of background
+    #Make difference of background.
     diff = cv2.absdiff(frame1, frame2)
 
-    #Collect points of face
+    #Collect points of face.
     points = [[face.left(), face.top(), face.right(), face.bottom()] for
               face in detector(cv2.cvtColor(face_cap, cv2.COLOR_BGR2GRAY))]
 
-    contours = np.array([ [points[0][0] - 10, points[0][1] - 50],
-                          [points[0][2] + 10, points[0][1] - 50],
-                          [points[0][2] + 10, points[0][3] + 10],
-                          [points[0][0] - 10, points[0][3] + 10] ])
-
-    cv2.fillPoly(diff, pts=[contours], color=(0, 0, 0))
+    #Display head for only have hands.
+    cv2.fillPoly(diff, pts=[np.array([ [points[0][0] - 10, points[0][1] - 50],
+                                       [points[0][2] + 10, points[0][1] - 50],
+                                       [points[0][2] + 10, points[0][3] + 10],
+                                       [points[0][0] - 10, points[0][3] + 10]  ])],
+                 color=(0, 0, 0))
 
     return diff
 
 
 def find_hand(copy, diff):
+    """We recuperate global detection of hands by:
+    filter of colors. And analysis of contours."""
 
-    imageYCrCb = cv2.cvtColor(diff, cv2.COLOR_BGR2YCR_CB)
-    skinRegionYCrCb = cv2.inRange(imageYCrCb, np.array([0,133,77]),
-                                            np.array([235,173,127]))
-
+    #Convert BGR to YCR_CB, define mask.
+    skinRegionYCrCb = cv2.inRange(cv2.cvtColor(diff, cv2.COLOR_BGR2YCR_CB),
+                                  np.array([0, 133, 77]), np.array([235, 173, 127]))
+    #Make mask.
     skinYCrCb = cv2.bitwise_and(diff, diff, mask = skinRegionYCrCb)
 
-    gray = cv2.cvtColor(skinYCrCb,cv2.COLOR_BGR2GRAY)
-    thresh = cv2.threshold(gray, 5, 255, 1)[1]
+    #Add threshold filter.
+    thresh = cv2.threshold(cv2.cvtColor(skinYCrCb, cv2.COLOR_BGR2GRAY), 5, 255, 1)[1]
 
+    #Search contours
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-                                   cv2.CHAIN_APPROX_NONE)
+    #Recuperate 100 < contour < 5000.
+    detection = [[cv2.boundingRect(contour)] for contour in contours if
+                 5000 > cv2.contourArea(contour) > 100]
 
-    #cv2.rectangle(copy, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    #Recuperate right and left hands detections. mid width frame is 200.
+    hands = [[i for i in detection if i[0][0] < 200], [i for i in detection if i[0][0] > 200]]
 
+    def including_detection(liste):
+        """Recuperate extremum points of detections"""
 
-    liste = [[cv2.boundingRect(contour)] for contour in contours if 5000 > cv2.contourArea(contour) > 100]
+        rectangle = [min([i[0][0] for i in liste]), min([i[0][1] for i in liste]),
+                     max([i[0][0] for i in liste]), max([i[0][1] for i in liste]),
+                     max([i[0][2] for i in liste]), max([i[0][3] for i in liste])]
 
-    liste1 = [i for i in liste if i[0][0] < 200]
-    liste2 = [i for i in liste if i[0][0] > 200]
-
-
-    def maxi(liste):
-        rectangle = [min([i[0][0] for i in liste]),
-                     min([i[0][1] for i in liste]),
-                     max([i[0][0] for i in liste]),
-                     max([i[0][1] for i in liste]),
-                     max([i[0][2] for i in liste]),
-                     max([i[0][3] for i in liste])]
         return rectangle
 
-    pts = [maxi(liste1), maxi(liste2)]
-
-    for pt in pts:
-        print(pt)
+    #Draw the global includes detections.
+    for pt in [including_detection(hands[0]), including_detection(hands[1])]:
         cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
+
+
 
 
 def video_lecture(video_name):
@@ -91,9 +92,7 @@ def video_lecture(video_name):
         elapsed_time = time.time() - start_time
         print(elapsed_time)
 
-        if cv2.waitKey(0) & 0xFF == ord('q'):
-            cv2.imwrite('ici.jpg', face_cap)
-            break
+        if cv2.waitKey(0) & 0xFF == ord('q'): break
 
     video.release()
     cv2.destroyAllWindows()
@@ -106,11 +105,3 @@ if __name__ == "__main__":
     video_name = "video/a.mp4"
 
     video_lecture(video_name)
-
-
-
-
-
-
-
-
