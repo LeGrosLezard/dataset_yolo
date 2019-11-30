@@ -18,22 +18,30 @@ def find_head(face_cap, out, detector, frame1, frame2):
     #Display head for only have hands.
     cv2.fillPoly(diff, pts=[np.array([ [points[0][0] - 10, points[0][1] - 50],
                                        [points[0][2] + 10, points[0][1] - 50],
-                                       [points[0][2] + 10, points[0][3] + 10],
-                                       [points[0][0] - 10, points[0][3] + 10]  ])],
+                                       [points[0][2] + 10, points[0][3] + 50],
+                                       [points[0][0] - 10, points[0][3] + 50]  ])],
                  color=(0, 0, 0))
 
     return diff
+
+
+def skin_detection(picture):
+
+    #Convert BGR to YCR_CB, define mask.
+    skinRegionYCrCb = cv2.inRange(cv2.cvtColor(picture, cv2.COLOR_BGR2YCR_CB),
+                                  np.array([0, 100, 77]), np.array([235, 235, 127]))
+    #Make mask.
+    skinYCrCb = cv2.bitwise_and(picture, picture, mask = skinRegionYCrCb)
+
+    return skinYCrCb
 
 
 def find_hand(diff):
     """We recuperate global detection of hands by:
     filter of colors. And analysis of contours."""
 
-    #Convert BGR to YCR_CB, define mask.
-    skinRegionYCrCb = cv2.inRange(cv2.cvtColor(diff, cv2.COLOR_BGR2YCR_CB),
-                                  np.array([0, 133, 77]), np.array([235, 173, 127]))
-    #Make mask.
-    skinYCrCb = cv2.bitwise_and(diff, diff, mask = skinRegionYCrCb)
+    #Recuperate skin detector
+    skinYCrCb = skin_detection(diff)
 
     #Add threshold filter.
     thresh = cv2.threshold(cv2.cvtColor(skinYCrCb, cv2.COLOR_BGR2GRAY), 5, 255, 1)[1]
@@ -64,22 +72,31 @@ def extraction_hands(hands, copy):
 
     #Draw the global includes detections.
     for hand, pt in enumerate([including_detection(hands[0]), including_detection(hands[1])]):
+
         #cv2.rectangle(copy, (pt[0], pt[1]), (pt[2] + pt[4], pt[3] + pt[5]), (0, 255, 0), 2)
+        print(pt)
+        crop_detection = copy[pt[1]-20: pt[3] + pt[5]+20, pt[0]-20: pt[2] + pt[4]+20]
 
-        crop = copy[pt[1] : pt[3] + pt[5], pt[0]-10 : pt[2] + pt[4]]
-
-        th2 = cv2.adaptiveThreshold(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY),255,cv2.ADAPTIVE_THRESH_MEAN_C,\
-                    cv2.THRESH_BINARY,11,2)
-
-        th3 = cv2.adaptiveThreshold(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY),255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
-                    cv2.THRESH_BINARY,11,2)
-
-        cv2.imshow('dzadaz', th2)
-        cv2.waitKey(0)
-        cv2.imshow('gdsgdsgd', th3)
+        skin_crop = skin_detection(crop_detection)
+        cv2.imshow("dzadzadza", skin_crop)
         cv2.waitKey(0)
 
-        cv2.imshow('Hand {}'.format(hand), crop)
+        gaussian_thresh = cv2.adaptiveThreshold(cv2.cvtColor(skin_crop, cv2.COLOR_BGR2GRAY), 255,
+                                                 cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
+
+
+        #Search contours
+        contours, _ = cv2.findContours(gaussian_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+
+        maxi = 0
+        for cnts in contours:
+            if 4000 > cv2.contourArea(cnts) > 10 and cv2.contourArea(cnts) > maxi:
+                maxi = cv2.contourArea(cnts)
+        for cnts in contours:
+            if cv2.contourArea(cnts) == maxi:
+                cv2.drawContours(crop_detection, [cnts], -1, (0,255,0), 2)
+
+        cv2.imshow('Hand {}'.format(hand), crop_detection)
         cv2.waitKey(0)
 
 
