@@ -8,17 +8,13 @@
 
 #----------------------------------------
 
-- trouvé les main via la couleur peau 
+- vérifier que c'est juste pcq ca a l'air mais pas des fois
 
-- si grand rectangle faire le contour
+- si rectangle trop petit chercher voisins
 
-- si plein de rectangle dans une zone distinct récupérer  hbdg
+- chercher modele de signe
 
-- si main trouvé chercher dans l'endroit précédent
-
-- et on sauvegarde l'endroit et on va chercher a l'endroit en faisant le trucks des voisins
-
-- si main vers tete enlever le filled
+- faire le contour de la main dans le rectangle
 
 #----------------------------------------
 
