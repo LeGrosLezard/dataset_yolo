@@ -29,7 +29,7 @@ def skin_detection(picture):
 
     #Convert BGR to YCR_CB, define mask.
     skinRegionYCrCb = cv2.inRange(cv2.cvtColor(picture, cv2.COLOR_BGR2YCR_CB),
-                                  np.array([0, 100, 77]), np.array([235, 235, 127]))
+                                  np.array([0, 50, 77]), np.array([235, 235, 127]))
     #Make mask.
     skinYCrCb = cv2.bitwise_and(picture, picture, mask = skinRegionYCrCb)
 
@@ -59,7 +59,7 @@ def find_hand(diff):
     return hands
 
 
-def extraction_hands(hands, copy):
+def extraction_hands(hands, diff, copy):
 
     def including_detection(liste):
         """Recuperate extremum points of detections"""
@@ -72,7 +72,7 @@ def extraction_hands(hands, copy):
     #Draw the global includes detections.
     for hand, pt in enumerate([including_detection(hands[0]), including_detection(hands[1])]):
 
-        crop_detection = copy[pt[1] - 5: pt[1] + pt[3]  + 5, pt[0] - 5: pt[0] + pt[2] + 5]
+        crop_detection = diff[pt[1] - 5: pt[1] + pt[3]  + 5, pt[0] - 5: pt[0] + pt[2] + 5]
 
 
         skin_crop = skin_detection(crop_detection)
@@ -125,7 +125,7 @@ def extraction_hands(hands, copy):
                                                          cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
 
                 ok = skin_detection(crop_detection)
-                thresh = cv2.threshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 5, 255, 1)[1]
+                thresh = cv2.threshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 10, 255, 1)[1]
 
                 cv2.imshow('ok', ok)
                 cv2.imshow('thresh', thresh)
@@ -136,11 +136,6 @@ def extraction_hands(hands, copy):
 
 
 
-
-##
-##
-##
-##
 ##                gaussian_thresh = cv2.adaptiveThreshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 255,
 ##                                                         cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,5,2)
 ##
@@ -207,7 +202,7 @@ def video_lecture(video_name):
         try:
             diff = find_head(face_cap, copy, detector, frame1, frame2)
             hands = find_hand(diff)
-            extraction_hands(hands, copy)
+            extraction_hands(hands, diff, copy)
         except: pass #no hands or no head
 
         cv2.imshow('Automatic HSV', copy)
