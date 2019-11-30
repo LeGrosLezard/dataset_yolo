@@ -14,7 +14,7 @@
 
 - si main trouvé chercher dans l'endroit précédent
 
-- et on sauvegarde l'endroit et on va chercher a l'endroit
+- et on sauvegarde l'endroit et on va chercher a l'endroit en faisant le trucks des voisins
 
 
 
