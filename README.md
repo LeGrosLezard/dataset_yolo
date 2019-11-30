@@ -8,6 +8,8 @@
 
 #----------------------------------------
 
+- voir si on peut avoir les parametres d'une image (sa luminosité ect faut mettre toutes les vidéo selon la video actuelle par exemple)
+
 - vérifier que c'est juste pcq ca a l'air mais pas des fois
 
 - si rectangle trop petit chercher voisins
