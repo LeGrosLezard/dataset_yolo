@@ -6,19 +6,11 @@
 
 - tester hand dlib
 
-- partie visage dlib // modele emotion (ca y'en a plein plein)
+- trouvé les main via la couleur peau via un slider
 
-  en gros on a la main via la couleur -> ok
-  
-  on trnasofrme ca en carré -> ok
-  
-  mtn faut dire la couleur dans chaque carré
-  
-  proba en haut proba en bas pcque sur un pannel petit 10 y'avais 80% du coup ben y'avais 80% mais c bon fallait juste parler j'ai eu peur tsé
-  
-  si last mouvement = bas bas donc bas mais pas au dela d'une certaine distance et pour haut
-  
-  et selon couleur si dans distance (rectangke) + couleur 100 % (mais le background et couleur peau) 
+- si main trouvé chercher dans l'endroit précédent
+
+- pour la vitesse faire le trucks de probabilité en définissant des zones + la frame + mouvement en cm (mouvement rapide/lent -> distance)
 
 
 
