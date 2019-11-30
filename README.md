@@ -10,7 +10,7 @@
 
 - si grand rectangle faire le contour
 
-- si plein de rectangle dans une zone distinct en faire la moyenne
+- si plein de rectangle dans une zone distinct récupérer  hbdg
 
 - si main trouvé chercher dans l'endroit précédent
 
