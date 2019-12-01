@@ -59,6 +59,7 @@ def find_hand(diff):
     return hands
 
 
+
 def extraction_hands(hands, diff, copy):
 
     def including_detection(liste):
@@ -69,67 +70,73 @@ def extraction_hands(hands, diff, copy):
 
         return rectangle
 
+
+
+    def make_line(thresh, adding):
+        """We make line for detect more than one area
+        with border, on eyelashes is paste to the border"""
+
+        cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (255, 255, 255), adding)
+        cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (255, 255, 255), adding)
+        cv2.line(thresh, (thresh.shape[1], 0), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), adding)
+        cv2.line(thresh, (0,  thresh.shape[0]), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), adding)
+
+        return thresh
+
+
+
+
+
+
     #Draw the global includes detections.
     for hand, pt in enumerate([including_detection(hands[0]), including_detection(hands[1])]):
 
         crop_detection = copy[pt[1]: pt[1] + pt[3], pt[0] : pt[0] + pt[2] ]
-        show_picture("crop_detection", crop_detection, 0, "")
-
 
         skin_mask = skin_detection(crop_detection)
+
         thresh = cv2.threshold(cv2.cvtColor(skin_mask, cv2.COLOR_BGR2GRAY), 5, 255, 1)[1]
+        thresh = make_line(thresh, 1)
 
 
-        def make_contours(picture):
+        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-            contours, _ = cv2.findContours(picture, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-
-            maxi = 0; maxi1 = 0
-            for cnts in contours:
-                if cv2.contourArea(cnts) > maxi:
-                    maxi = cv2.contourArea(cnts)
-                if cv2.contourArea(cnts) < maxi and cv2.contourArea(cnts) > maxi1:
-                    maxi1 = cv2.contourArea(cnts)
-
-
-            return contours, maxi, maxi1
-
-
-        contours, maxi, maxi1 = make_contours(thresh)
+        maxi = 0; maxi1 = 0
+        for cnts in contours:
+            if cv2.contourArea(cnts) > maxi:
+                maxi = cv2.contourArea(cnts)
+            if cv2.contourArea(cnts) < maxi and cv2.contourArea(cnts) > maxi1:
+                maxi1 = cv2.contourArea(cnts)
 
         for cnts in contours:
             if cv2.contourArea(cnts) == maxi1 and cv2.contourArea(cnts) > 2000:
                 x, y, w, h = cv2.boundingRect(cnts)
+
             elif cv2.contourArea(cnts) == maxi:
                 x, y, w, h = cv2.boundingRect(cnts)
 
 
         crop = crop_detection[y:y+h, x:x+w]
 
+        #show_picture("crop", crop, 0, "")
+
+
         ok = skin_detection(crop)
         thresh = cv2.threshold(cv2.cvtColor(ok, cv2.COLOR_BGR2GRAY), 1, 255, 1)[1]
 
+        thresh = make_line(thresh, 5)
 
-        def make_line(thresh):
-            """We make line for detect more than one area
-            with border, on eyelashes is paste to the border"""
+        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-            cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (255, 255, 255), 5)
-            cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (255, 255, 255), 5)
-            cv2.line(thresh, (thresh.shape[1], 0), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), 5)
-            cv2.line(thresh, (0,  thresh.shape[0]), (thresh.shape[1], thresh.shape[0]), (255, 255, 255), 5)
-
-            return thresh
-
-        thresh = make_line(thresh)
-        kernel = np.ones((5,5), np.uint8) 
-        img_dilation = cv2.dilate(thresh, kernel, iterations=3) 
-
-
-        contours, maxi, maxi1 = make_contours(thresh)
+        maxi = 0; maxi1 = 0
+        for cnts in contours:
+            if cv2.contourArea(cnts) > maxi:
+                maxi = cv2.contourArea(cnts)
+            if cv2.contourArea(cnts) < maxi and cv2.contourArea(cnts) > maxi1:
+                maxi1 = cv2.contourArea(cnts)
 
         for cnts in contours:
-            if cv2.contourArea(cnts) == maxi1 and cv2.contourArea(cnts) > 1000:
+            if cv2.contourArea(cnts) == maxi1:
                 cv2.drawContours(crop_detection, [cnts], -1, (0,255,0), 3)
 
 
@@ -171,7 +178,7 @@ def video_lecture(video_name):
         elapsed_time = time.time() - start_time
         print(elapsed_time)
 
-        if cv2.waitKey(0) & 0xFF == ord('q'): break
+        if cv2.waitKey(1) & 0xFF == ord('q'): break
 
     video.release()
     cv2.destroyAllWindows()
