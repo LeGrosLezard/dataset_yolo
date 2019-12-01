@@ -1,6 +1,6 @@
 # foehnzofije
 
-
+faut que la loss stagne
 
 - tester hand dlib
 
