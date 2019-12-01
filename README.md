@@ -8,17 +8,7 @@
 
 #----------------------------------------
 
-- apprendre ycb chpas quoi et les fenetres toutes petites qui vont sur l'autre écran
-
-- voir si on peut avoir les parametres d'une image (sa luminosité ect faut mettre toutes les vidéo selon la video actuelle par exemple)
-
-- vérifier que c'est juste pcq ca a l'air mais pas des fois
-
-- si rectangle trop petit chercher voisins
-
-- chercher modele de signe
-
-- faire le contour de la main dans le rectangle
+- au pire c'est pas grave mais faut juste enlever le background derriere et ne récupérer que la main 
 
 #----------------------------------------
 
